@@ -1,24 +1,20 @@
-require("dotenv").config();
-
 const express = require("express");
 const cors = require("cors");
 
 const app = express();
 
 app.use(cors());
-app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-const PASSWORD = process.env.PASSWORD;
+const PASSWORD = process.env.PASSWORD || "pCubeTechFirm@123";
 
-// Health Check
 app.get("/", (req, res) => {
     res.json({
-        status: "online"
+        status: "online",
+        message: "Locker API Running"
     });
 });
 
-// Verify Password
 app.post("/verify", (req, res) => {
 
     const { password } = req.body;
@@ -35,12 +31,9 @@ app.post("/verify", (req, res) => {
         });
 
     return res.status(401).json({
-        success: false,
-        message: "Wrong Password"
+        success: false
     });
 
 });
 
-app.listen(process.env.PORT || 3000, () => {
-    console.log("API Running...");
-});
+module.exports = app;
