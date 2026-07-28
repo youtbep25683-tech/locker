@@ -6,7 +6,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const PASSWORD = process.env.PASSWORD || "pCubeTechFirm@123";
+const PASSWORD = process.env.PASSWORD;
 
 app.get("/", (req, res) => {
     res.json({
